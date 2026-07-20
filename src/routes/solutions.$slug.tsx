@@ -3,7 +3,7 @@ import { SiteLayout } from "@/components/site/Layout";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CALENDLY_URL } from "@/components/site/Nav";
-import { solutionBySlug, solutions } from "@/data/solutions";
+import { solutionBySlug, solutions, type Solution } from "@/data/solutions";
 
 export const Route = createFileRoute("/solutions/$slug")({
   loader: ({ params }) => {
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/solutions/$slug")({
 });
 
 function SolutionPage() {
-  const { s } = Route.useLoaderData();
+  const { s } = Route.useLoaderData() as { s: Solution };
   const others = solutions.filter((x) => x.slug !== s.slug).slice(0, 3);
   return (
     <SiteLayout>

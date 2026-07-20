@@ -3,7 +3,7 @@ import { SiteLayout } from "@/components/site/Layout";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CALENDLY_URL } from "@/components/site/Nav";
-import { industryBySlug, industries } from "@/data/industries";
+import { industryBySlug, industries, type Industry } from "@/data/industries";
 
 export const Route = createFileRoute("/industries/$slug")({
   loader: ({ params }) => {
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/industries/$slug")({
 });
 
 function IndustryPage() {
-  const { ind } = Route.useLoaderData();
+  const { ind } = Route.useLoaderData() as { ind: Industry };
   const others = industries.filter((x) => x.slug !== ind.slug).slice(0, 3);
   return (
     <SiteLayout>

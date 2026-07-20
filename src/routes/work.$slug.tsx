@@ -48,8 +48,10 @@ export const Route = createFileRoute("/work/$slug")({
   ),
 });
 
+type WorkCase = { title: string; tagline: string; challenge: string; arch: string[]; metrics: { m: string; l: string }[] };
+
 function WorkPage() {
-  const { c } = Route.useLoaderData();
+  const { c } = Route.useLoaderData() as { c: WorkCase; slug: string };
   return (
     <SiteLayout>
       <PageHero eyebrow="Case Study" title={c.title} lead={c.tagline}>
