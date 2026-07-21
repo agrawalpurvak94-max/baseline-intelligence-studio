@@ -2,11 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const links = [
-  { to: "/", label: "Home" },
-  { to: "/solutions", label: "Solutions" },
-  { to: "/industries", label: "Industries" },
   { to: "/work", label: "Work" },
   { to: "/about", label: "About" },
+  { to: "/insights", label: "Insights" },
 ] as const;
 
 export const CALENDLY_URL = "https://calendly.com/baseline-ai/strategy-call";
