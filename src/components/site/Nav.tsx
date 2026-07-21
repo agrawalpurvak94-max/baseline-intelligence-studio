@@ -2,11 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 const links = [
-  { to: "/", label: "Home" },
-  { to: "/solutions", label: "Solutions" },
-  { to: "/industries", label: "Industries" },
   { to: "/work", label: "Work" },
   { to: "/about", label: "About" },
+  { to: "/insights", label: "Insights" },
 ] as const;
 
 export const CALENDLY_URL = "https://calendly.com/baseline-ai/strategy-call";
@@ -48,7 +46,6 @@ export function Nav() {
               to={l.to}
               className="px-3 py-2 rounded-full text-muted-foreground hover:text-foreground transition-colors"
               activeProps={{ className: "text-foreground" }}
-              activeOptions={{ exact: l.to === "/" }}
             >
               {l.label}
             </Link>
@@ -84,7 +81,6 @@ export function Nav() {
                 onClick={() => setOpen(false)}
                 className="py-2 text-[15px] text-muted-foreground"
                 activeProps={{ className: "text-foreground" }}
-                activeOptions={{ exact: l.to === "/" }}
               >
                 {l.label}
               </Link>
