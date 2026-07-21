@@ -46,7 +46,6 @@ export function Nav() {
               to={l.to}
               className="px-3 py-2 rounded-full text-muted-foreground hover:text-foreground transition-colors"
               activeProps={{ className: "text-foreground" }}
-              activeOptions={{ exact: l.to === "/" }}
             >
               {l.label}
             </Link>
@@ -82,7 +81,6 @@ export function Nav() {
                 onClick={() => setOpen(false)}
                 className="py-2 text-[15px] text-muted-foreground"
                 activeProps={{ className: "text-foreground" }}
-                activeOptions={{ exact: l.to === "/" }}
               >
                 {l.label}
               </Link>
