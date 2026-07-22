@@ -16,6 +16,7 @@ export function Footer() {
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
             AI Engineering & Automation Studio. From manual work to intelligent systems.
           </p>
+          <p className="mt-2 text-xs text-muted-foreground/60">A Leadryze company.</p>
         </div>
         <div>
           <div className="text-eyebrow mb-4">Navigate</div>
