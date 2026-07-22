@@ -7,7 +7,7 @@ const links = [
   { to: "/insights", label: "Insights" },
 ] as const;
 
-export const CALENDLY_URL = "https://calendly.com/baseline-ai/strategy-call";
+export const CALENDLY_URL = "https://calendly.com/purvak/businessconsultation";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
