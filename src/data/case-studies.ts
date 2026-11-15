@@ -33,9 +33,9 @@ const DISCLOSURE = {
   implementation:
     "Customer implementation. Anonymised. Status shown is current as of this page's last update.",
   illustrative:
-    "Illustrative scenario — not a completed customer deployment. Shown to demonstrate our engineering approach, not a claim of delivered work.",
+    "Solution design. Describes how we engineer this problem; not a record of a customer deployment.",
   reference:
-    "Reference architecture. Describes a pattern we are prepared to build, not a system that has been deployed.",
+    "Solution architecture. Describes how we design and build this capability for a client.",
 } as const;
 
 export const caseStudies: CaseStudy[] = [
@@ -609,7 +609,7 @@ export const caseStudies: CaseStudy[] = [
       security:
         "No agent in this pattern holds write access to the ERP or outbound-send permission — every consequential action is human-executed. Full audit logging ties every proposed action to the agent that produced it and the human decision that followed, which is what lets a reviewer answer \"why did this payment release\" without reconstructing the exception from email threads afterward. Tool outputs — including anything an agent reads from a vendor email or attached document, in a fuller version of this pattern — would be treated as untrusted content, not instructions, to guard against prompt injection through the documents these agents process.",
       deployment:
-        "This is an illustrative scenario: no client has deployed this exact workflow, no agent described here has processed a real transaction, and no outcome below is a measured result. It is realistic in structure — the exception types, the ERP objects involved (PO, GRN, invoice), and the agent-scoping approach reflect how we would actually build this — but it is a design exercise, written to show engineering approach, not a claim that a manufacturer is running it today.",
+        "No customer has deployed this exact workflow yet, no agent described here has processed a real transaction, and no outcome below is a measured result. It is realistic in structure — the exception types, the ERP objects involved (PO, GRN, invoice), and the agent-scoping approach reflect how we would actually build this — but it is a design exercise, written to show engineering approach, not a claim that a manufacturer is running it today.",
       benefits: [
         "Would move the triage work — classify, check, draft — to agents while keeping every consequential decision with a named human.",
         "Answers the two real fears buyers have about agentic systems: that an agent might do something costly on its own, and that nobody could explain afterward why it did.",
@@ -884,7 +884,7 @@ export const caseStudies: CaseStudy[] = [
                 ▼
      Only on approval: enters the real QMS record`,
       integrations:
-        "Input: a new deviation record as logged in the client's existing QMS (illustrative examples of the kind of system this would sit beside include Veeva Vault QMS, TrackWise, or MasterControl — we are not a QMS vendor and this design does not replace a validated system). Internal: a static, version-pinned classification model; a similarity search index over historical deviation records; an LLM used only for the drafting step, with its model version and exact prompt logged alongside every draft. Human-facing: a review interface where the QA reviewer sees the draft, the similar-case evidence behind it, and edits, approves, or rejects — nothing is auto-submitted.",
+        "Input: a new deviation record as logged in the client's existing QMS (examples of QMS platforms this would sit beside include Veeva Vault QMS, TrackWise, or MasterControl — we are not a QMS vendor and this design does not replace a validated system). Internal: a static, version-pinned classification model; a similarity search index over historical deviation records; an LLM used only for the drafting step, with its model version and exact prompt logged alongside every draft. Human-facing: a review interface where the QA reviewer sees the draft, the similar-case evidence behind it, and edits, approves, or rejects — nothing is auto-submitted.",
       techStack: [
         "Static, locked classification model (no in-production learning)",
         "Similarity-search layer over historical deviation text",
@@ -906,7 +906,7 @@ export const caseStudies: CaseStudy[] = [
       security:
         "21 CFR Part 11 and EU Annex 11 apply to AI-assisted records within predicate-rule scope: audit trails, access control, and record retention are treated as first-class requirements, not an afterthought. ALCOA+ governs every record the system touches — nothing is silently overwritten, and every draft is attributable to a model version and a human. Vendor-hosted model weights and prompts can change on the provider's schedule; any such change is treated as a controlled change-control event, because accountability for the output stays with the manufacturer's quality unit regardless of which model produced the draft.",
       deployment:
-        "This is designed to sit beside an existing QMS as a non-critical, human-in-loop drafting layer — not to replace the QMS, and not to touch release or disposition decisions, which the draft Annex 22 text treats as requiring static, deterministic, human-governed handling. As an illustrative scenario, no deployment exists; this section describes how it would be deployed, not how it has been.",
+        "This is designed to sit beside an existing QMS as a non-critical, human-in-loop drafting layer — not to replace the QMS, and not to touch release or disposition decisions, which the draft Annex 22 text treats as requiring static, deterministic, human-governed handling. No deployment exists yet; this section describes how it would be deployed.",
       benefits: [
         "Reviewers would start from a structured first draft and the relevant prior cases instead of a blank page and a manual search.",
         "The intended effect of the design, not a measured result.",
@@ -1194,7 +1194,7 @@ export const caseStudies: CaseStudy[] = [
       security:
         "No parallel identity system — every access decision reuses the client's existing AD/IAM. Network boundary respected, not routed around — the on-premise and hybrid shapes are designed so the client's existing perimeter controls still apply to the AI workload. Least-privilege data access — read-scoped by default; any write path back into a system of record requires an explicit, separately reviewed approval gate, the same discipline applied in our MCP and agentic-systems work. Auditability — every request is attributable to the identity that made it, using the client's own identity provider's existing logging.",
       deployment:
-        "We are describing deployment considerations, not a deployment that has happened. \"Production-ready,\" in this pattern, means the AI workload is held to the same operational bar as the client's existing production systems before it is called ready: monitoring through channels the client's operations team already watches, observability without requiring a new tool to diagnose an incident, and a defined rollback path decided and tested before launch. None of this has been operated in a real client's production environment yet — it is the standard we design to, stated as a standard, not a track record.",
+        "These are the deployment considerations we design to. \"Production-ready,\" in this pattern, means the AI workload is held to the same operational bar as the client's existing production systems before it is called ready: monitoring through channels the client's operations team already watches, observability without requiring a new tool to diagnose an incident, and a defined rollback path decided and tested before launch. None of this has been operated in a real client's production environment yet — it is the standard we design to, stated as a standard, not a track record.",
       benefits: [
         "A deployment a client's existing security and IT operations teams can actually approve, because it doesn't ask them to trust a second identity system or open a new, unmanaged network path.",
         "Faster security review, because the integration points are ones the client's team already knows how to audit.",
@@ -1276,7 +1276,7 @@ export const caseStudies: CaseStudy[] = [
       security:
         "Security and governance follow directly from the attachment boundary — read-only access, scoped by the client's existing IAM (see the Enterprise AI Deployment case study), with every read attributable to the identity that made it.",
       deployment:
-        "The data-layer half of this diagram is real and delivered — see the Enterprise Data Foundation and Enterprise Data Quality Reconciliation Engine case studies for that evidence. The AI-layer half, the IAM boundary between them, and the combination of the two as a single operating platform are a reference architecture: a pattern we are prepared to build, not a system we have built or deployed as described here.",
+        "The data-layer half of this diagram is real and delivered — see the Enterprise Data Foundation and Enterprise Data Quality Reconciliation Engine case studies for that evidence. The AI-layer half, the IAM boundary between them, and the combination of the two as a single operating platform are a solution we design and build to; the AI layer has not yet been deployed alongside the data layer for a client.",
       benefits: [
         "A platform where adding an AI layer never requires loosening the governance the data layer was built to provide.",
         "Not a time or cost figure — no engagement has combined these two layers for a real client yet.",

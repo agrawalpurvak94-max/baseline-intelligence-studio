@@ -1,20 +1,26 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CALENDLY_URL } from "@/components/site/Nav";
-import { caseStudyBySlug, caseStudies, type CaseStudy, type CaseStudyCategory } from "@/data/case-studies";
+import { caseStudyBySlug, caseStudies, type CaseStudy } from "@/data/case-studies";
 
-const CATEGORY_LABEL: Record<CaseStudyCategory, string> = {
-  implementation: "Customer Implementation",
-  illustrative: "Illustrative Scenario",
-  reference: "Reference Architecture",
+const SOLUTION_REDIRECTS: Record<string, string> = {
+  "enterprise-data-foundation-manufacturing": "enterprise-data-engineering",
+  "enterprise-knowledge-intelligence-mcp": "enterprise-ai-deployment",
+  "enterprise-ai-deployment-existing-it": "enterprise-ai-deployment",
+  "industrial-ai-vision-manufacturing-quality": "industrial-ai-vision",
+  "multi-agent-enterprise-workflows": "ai-agentic-systems",
+  "ai-assisted-pharmaceutical-documentation-qa": "pharmaceutical-documentation-qa",
+  "enterprise-data-ai-platform-architecture": "enterprise-ai-architecture",
 };
 
 export const Route = createFileRoute("/work/$slug")({
   loader: ({ params }) => {
+    const target = SOLUTION_REDIRECTS[params.slug];
+    if (target) throw redirect({ to: "/solutions/$slug", params: { slug: target }, statusCode: 301 });
     const c = caseStudyBySlug(params.slug);
-    if (!c) throw notFound();
+    if (!c || c.category !== "implementation") throw notFound();
     return { c };
   },
   head: ({ loaderData }) => {
@@ -40,27 +46,19 @@ export const Route = createFileRoute("/work/$slug")({
   ),
 });
 
-function CategoryBadge({ c }: { c: CaseStudy }) {
-  return (
-    <div className="flex flex-wrap items-center gap-3">
-      <span className="text-eyebrow rounded-full border border-white/10 bg-white/[0.03] px-3 py-1">
-        {CATEGORY_LABEL[c.category]}
-      </span>
-      <span className="text-xs uppercase tracking-[0.08em] text-muted-foreground">{c.statusLabel}</span>
-    </div>
-  );
+function StatusLine({ c }: { c: CaseStudy }) {
+  return <span className="text-xs uppercase tracking-[0.08em] text-purple-soft">{c.statusLabel}</span>;
 }
 
 function WorkPage() {
   const { c } = Route.useLoaderData() as { c: CaseStudy };
-  const related = caseStudies.filter((x) => c.relatedCaseStudies?.includes(x.slug));
+  const related = caseStudies.filter((x) => c.relatedCaseStudies?.includes(x.slug) && x.category === "implementation");
 
   return (
     <SiteLayout>
-      <PageHero eyebrow="Case Study" title={c.title} lead={c.tagline}>
+      <PageHero eyebrow="Customer work" title={c.title} lead={c.tagline}>
         <div className="mt-6">
-          <CategoryBadge c={c} />
-          <p className="mt-4 max-w-2xl text-sm text-muted-foreground">{c.disclosure}</p>
+          <StatusLine c={c} />
         </div>
         <div className="mt-10 flex gap-3">
           <a href={CALENDLY_URL} target="_blank" rel="noreferrer" className="btn-primary">Book a Strategy Call</a>
@@ -187,9 +185,8 @@ function WorkPage() {
       <section className="container-x py-16 border-t border-white/5">
         <Reveal>
           <div className="rounded-3xl hairline surface-1 p-6 md:p-10 max-w-3xl">
-            <CategoryBadge c={c} />
+            <StatusLine c={c} />
             <p className="mt-4 text-foreground/90">{c.sections.statusDisclosure}</p>
-            <p className="mt-4 text-sm text-muted-foreground">{c.disclosure}</p>
           </div>
         </Reveal>
       </section>
@@ -203,7 +200,7 @@ function WorkPage() {
                 <div className="mt-5 grid gap-3">
                   {related.map((r) => (
                     <Link key={r.slug} to="/work/$slug" params={{ slug: r.slug }} className="card-dark block p-5">
-                      <div className="text-xs uppercase tracking-[0.08em] text-muted-foreground">{CATEGORY_LABEL[r.category]}</div>
+                      <div className="text-xs uppercase tracking-[0.08em] text-muted-foreground">{r.statusLabel}</div>
                       <div className="text-display mt-2 text-lg">{r.title}</div>
                     </Link>
                   ))}

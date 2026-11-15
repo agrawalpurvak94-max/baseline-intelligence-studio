@@ -43,7 +43,6 @@ export const pillars: Pillar[] = [
     solutionSlugs: ["enterprise-data-engineering", "sap-data-integration-analytics"],
     caseStudySlugs: [
       "sap-exports-manufacturing-intelligence-platform",
-      "enterprise-data-foundation-manufacturing",
       "enterprise-data-quality-reconciliation-engine",
     ],
   },
@@ -74,11 +73,7 @@ export const pillars: Pillar[] = [
       "Every output attributable to a model version, prompt and reviewer",
     ],
     solutionSlugs: ["custom-mcp-server-development", "industrial-ai-vision", "ai-agentic-systems"],
-    caseStudySlugs: [
-      "enterprise-knowledge-intelligence-mcp",
-      "industrial-ai-vision-manufacturing-quality",
-      "multi-agent-enterprise-workflows",
-    ],
+    caseStudySlugs: [],
   },
   {
     slug: "ai-operations-automation",
@@ -106,11 +101,10 @@ export const pillars: Pillar[] = [
       "Every pipeline run independently reconciled, not spot-checked",
       "Exceptions ranked by a stated priority and routed to a person, not guessed at by volume",
     ],
-    solutionSlugs: ["intelligent-automation", "quality-assurance-automation"],
+    solutionSlugs: ["intelligent-automation", "quality-assurance-automation", "manufacturing-operations-visibility", "pharmaceutical-documentation-qa"],
     caseStudySlugs: [
       "intelligent-inventory-reconciliation",
       "financial-intelligence-platform",
-      "ai-assisted-pharmaceutical-documentation-qa",
     ],
   },
   {
@@ -171,11 +165,8 @@ export const pillars: Pillar[] = [
       "No AI workload goes live without a monitored path and a tested rollback",
       "A deployment shape matched to the estate the client already has, not a default we push regardless",
     ],
-    solutionSlugs: ["enterprise-ai-deployment"],
-    caseStudySlugs: [
-      "enterprise-ai-deployment-existing-it",
-      "enterprise-data-ai-platform-architecture",
-    ],
+    solutionSlugs: ["enterprise-ai-deployment", "enterprise-ai-architecture"],
+    caseStudySlugs: [],
   },
 ];
 

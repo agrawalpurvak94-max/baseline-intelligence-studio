@@ -5,6 +5,66 @@ import { Reveal } from "@/components/site/Reveal";
 import { CALENDLY_URL } from "@/components/site/Nav";
 import { solutionBySlug, solutions, type Solution } from "@/data/solutions";
 import { pillarBySlug } from "@/data/pillars";
+import { caseStudyBySlug, type CaseStudy } from "@/data/case-studies";
+
+function CaseDetail({ c, diagramTitle }: { c: CaseStudy; diagramTitle: string }) {
+  const narrative = [
+    { label: "The business problem", body: c.sections.businessContext },
+    { label: "Why existing approaches fall short", body: c.sections.whyInsufficient },
+    { label: "Our approach", body: c.sections.proposedSolution },
+  ];
+  return (
+    <section className="container-x py-20 border-t border-white/5">
+      <Reveal>
+        <h2 className="text-display text-3xl md:text-5xl max-w-3xl">{c.title}</h2>
+      </Reveal>
+      <div className="mt-12 grid gap-10 max-w-3xl">
+        {narrative.map((n) => (
+          <Reveal key={n.label}>
+            <div>
+              <div className="text-eyebrow">{n.label}</div>
+              <p className="mt-4 text-foreground/90">{n.body}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+      <Reveal>
+        <div className="mt-16 rounded-3xl hairline surface-1 p-6 md:p-10">
+          <div className="text-eyebrow mb-6">{diagramTitle}</div>
+          <pre className="overflow-x-auto text-[11px] md:text-xs leading-relaxed font-mono text-foreground/80 whitespace-pre">
+            {c.sections.architectureDiagram}
+          </pre>
+        </div>
+      </Reveal>
+      <div className="mt-16 grid gap-10 max-w-3xl">
+        <Reveal>
+          <div>
+            <div className="text-eyebrow">Integrations</div>
+            <p className="mt-4 text-foreground/90">{c.sections.integrations}</p>
+          </div>
+        </Reveal>
+        <Reveal>
+          <div>
+            <div className="text-eyebrow">Security and governance</div>
+            <p className="mt-4 text-foreground/90">{c.sections.security}</p>
+          </div>
+        </Reveal>
+        <Reveal>
+          <div>
+            <div className="text-eyebrow">Deployment considerations</div>
+            <p className="mt-4 text-foreground/90">{c.sections.deployment}</p>
+          </div>
+        </Reveal>
+        <Reveal>
+          <div>
+            <div className="text-eyebrow">Engineering challenges</div>
+            <p className="mt-4 text-foreground/90">{c.sections.challenge}</p>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
 
 export const Route = createFileRoute("/solutions/$slug")({
   loader: ({ params }) => {
@@ -222,6 +282,11 @@ function SolutionPage() {
           </div>
         </section>
       ) : null}
+
+      {s.detailCaseSlugs?.map((slug) => {
+        const c = caseStudyBySlug(slug);
+        return c ? <CaseDetail key={slug} c={c} diagramTitle={s.diagramTitle ?? `How We Approach ${s.title}`} /> : null;
+      })}
 
       <section className="container-x py-20 border-t border-white/5">
         <div className="text-eyebrow">More solutions</div>

@@ -241,7 +241,7 @@ export const industries: Industry[] = [
       "If you want AI to make or recommend a batch disposition or release decision, that's off the table under our own stated boundary — not a regulatory technicality we might relax. If your first requirement is a certified, vendor-validated QMS/LIMS/MES replacement, you need that vendor, not us. And if your plant is paper-only with no SAP or QMS extract to start from, the data-integration groundwork has to come before any of this.",
     caseStudies: [
       "sap-exports-manufacturing-intelligence-platform",
-      "ai-assisted-pharmaceutical-documentation-qa",
+      "intelligent-inventory-reconciliation",
     ],
     relatedCapabilities: [
       "sap-data-integration-analytics",
@@ -350,8 +350,8 @@ export const industries: Industry[] = [
     ],
     notAFit:
       "If you need a camera-and-PLC inspection system shipped and warranted by a single vendor on day one, that's a hardware-and-vision specialist's job — we'd rather point you there than pretend we're that vendor. And if your ERP or quality data isn't extractable at all yet — genuinely paper-only — the digitisation step has to come before a scorecard or traceability layer makes sense.",
-    caseStudies: ["industrial-ai-vision-manufacturing-quality"],
     relatedCapabilities: [
+      "industrial-ai-vision",
       "sap-data-integration-analytics",
       "enterprise-data-engineering",
       "legacy-application-modernisation",

@@ -9,6 +9,8 @@ export type Solution = {
   outcomes: string[];
   // Pillar slug this solution rolls up into — see src/data/pillars.ts
   pillar?: string;
+  detailCaseSlugs?: string[];
+  diagramTitle?: string;
   // --- new, optional (structured deep-dive content; renders conditionally in solutions.$slug.tsx) ---
   deepDive?: {
     // Engineering lifecycle — pipeline stages, or the vision engineering lifecycle
@@ -69,7 +71,7 @@ export const solutions: Solution[] = [
   },
   {
     slug: "ai-agentic-systems",
-    title: "Enterprise AI & Agentic Systems",
+    title: "Agentic Workflow Automation",
     eyebrow: "Capability",
     tagline: "Decision-support systems that reason across your data and draft the next step — a human still decides.",
     lead: "We build agents that retrieve from your governed data, draft the report, the triage note or the recommendation, and hand it to a named reviewer. Nothing acts on a production system without an approval step, and every output is attributable to the model version and prompt that produced it.",
@@ -94,6 +96,7 @@ export const solutions: Solution[] = [
       "Consistent triage logic at volume, with real exceptions still escalated to a person",
     ],
     pillar: "ai-engineering",
+    detailCaseSlugs: ["multi-agent-enterprise-workflows"],
   },
   {
     slug: "custom-software",
@@ -260,6 +263,7 @@ export const solutions: Solution[] = [
       "A pipeline architecture that doesn't assume SAP is the only source worth engineering for",
     ],
     pillar: "data-engineering",
+    detailCaseSlugs: ["enterprise-data-foundation-manufacturing"],
     deepDive: {
       lifecycle: [
         { stage: "Source systems", detail: "ERP, CRM, MES, operational databases, APIs, spreadsheets and flat files — whatever actually produces the data, not a single idealised source. SAP exports are one evidenced example; the pipeline pattern doesn't depend on SAP specifically." },
@@ -421,8 +425,8 @@ export const solutions: Solution[] = [
     slug: "sap-data-integration-analytics",
     title: "SAP Data Integration & Analytics",
     eyebrow: "Capability",
-    tagline: "Today: SAP export and extract driven. Live SAP system integration is on our roadmap, not yet delivered — and we'll keep saying so until it is.",
-    lead: "We turn the SAP trial-balance, inventory and report exports your team already pulls into deterministic calculation engines, reconciled column by column against the workbook they replace. This is export-and-extract-driven work. We have not built live SAP OData or RFC integration for a client, and the distinction matters enough that we state it plainly rather than let 'SAP integration' imply more than we've done.",
+    tagline: "Calculation engines built on SAP exports and extracts, reconciled to the workbook Finance already trusts. Live SAP system integration is a scoped extension.",
+    lead: "We turn the SAP trial-balance, inventory and report exports your team already pulls into deterministic calculation engines, reconciled column by column against the workbook they replace. This is export-and-extract-driven work. Live SAP OData or RFC integration is a separate scope, designed and built on request for each system landscape.",
     capabilities: [
       "SAP trial-balance & export processing",
       "Inventory report-family calculation (ageing, holding, FG & Bulk, carriage inwards)",
@@ -449,8 +453,8 @@ export const solutions: Solution[] = [
     slug: "custom-mcp-server-development",
     title: "Custom MCP Server Development",
     eyebrow: "Capability — methodology",
-    tagline: "A governed, read-only-first MCP layer over your SAP, MES and QMS estate — the architecture pattern, not a shipped product yet.",
-    lead: "We design permission-aware MCP servers that expose your plant's actual metric definitions — what 'OEE', 'OTIF' or 'obsolete' mean across your systems — as narrow, auditable tools, not a generic SQL-over-everything connector. This is methodology we design and price today. We have not yet built and deployed an MCP server for a client, and we say so plainly rather than let the word 'development' imply otherwise.",
+    tagline: "A governed, read-only-first MCP layer over your SAP, MES and QMS estate — narrow, auditable tools instead of a connector to everything.",
+    lead: "We design permission-aware MCP servers that expose your plant's actual metric definitions — what 'OEE', 'OTIF' or 'obsolete' mean across your systems — as narrow, auditable tools, not a generic SQL-over-everything connector. Each design is scoped to the systems and metrics the client runs, and priced and documented before any build begins.",
     capabilities: [
       "Plant/enterprise semantic layer design",
       "Read-only-first tool scoping",
@@ -475,19 +479,20 @@ export const solutions: Solution[] = [
   },
   {
     slug: "industrial-ai-vision",
-    title: "Industrial AI Vision",
-    eyebrow: "Capability — reference architecture",
-    tagline: "Reference architecture for industrial computer vision — quality inspection, packaging/labelling verification, assembly checks, PPE and line monitoring — designed, not yet deployed.",
-    lead: "This is reference-architecture work, not a deployment: no code, model, dataset or pilot exists for a customer today. We design the engineering lifecycle for industrial vision use cases — visual quality inspection and defect detection, packaging/labelling/print verification, component presence and assembly verification, PPE and workplace safety monitoring, production-line visual monitoring, and image/video anomaly detection — and we state plainly what the architecture is designed to achieve, never what it has already achieved. The most developed example is a concept for in-line marking-depth verification combining 3D laser profiling with machine-vision grading and bounded closed-loop compensation, prepared as a blueprint for an automation OEM serving automotive customers.",
+    title: "Industrial Vision AI for Manufacturing Quality",
+    diagramTitle: "How We Approach Industrial Vision AI",
+    eyebrow: "Capability — Industrial Vision AI",
+    tagline: "Computer vision that automates visual inspection, identifies defects and improves quality monitoring across production.",
+    lead: "We design and implement computer vision solutions that help manufacturers automate visual inspection, identify defects and improve quality monitoring across production processes. Every system starts from the inspection criteria agreed with quality and production stakeholders, then moves through data capture at the station, an anomaly-first model, a chosen operating point and integration with the systems that act on a result. The most developed application is in-line marking-depth verification, combining 3D laser profiling with machine-vision grading and bounded closed-loop compensation.",
     capabilities: [
-      "Visual quality inspection & defect detection",
-      "Packaging, labelling & print verification",
-      "Component presence & assembly verification",
-      "PPE & workplace safety monitoring",
-      "Production-line visual monitoring",
-      "Image & video-based anomaly detection",
-      "Defect taxonomy & cost-of-escape definition",
-      "Edge vs. cloud inference trade-off analysis",
+      "Visual defect detection",
+      "Component presence verification",
+      "Assembly verification",
+      "Packaging & label inspection",
+      "Edge inference at the line",
+      "Image processing pipelines",
+      "Quality analytics & drift tracking",
+      "Production system integration",
     ],
     workflow: [
       { step: "Define", detail: "Inspection criteria, defect taxonomy and the real cost of a false reject vs. an escape, agreed with QC or safety stakeholders." },
@@ -498,10 +503,11 @@ export const solutions: Solution[] = [
     ],
     outcomes: [
       "A stated operating point and confusion matrix, not an unverifiable accuracy claim",
-      "No deployment claim until a pilot exists",
-      "A clear boundary between what's a reference architecture and what's running",
+      "Bounded automation: every closed-loop action stays inside limits agreed before deployment",
+      "Every decision logged against the sensor data that produced it",
     ],
     pillar: "ai-engineering",
+    detailCaseSlugs: ["industrial-ai-vision-manufacturing-quality"],
     deepDive: {
       lifecycle: [
         { stage: "Problem definition & inspection criteria", detail: "What counts as a defect, a presence/absence failure, a PPE violation or an anomaly is agreed explicitly with QC, safety or production stakeholders before any image is captured — not inferred from a dataset after the fact." },
@@ -519,7 +525,7 @@ export const solutions: Solution[] = [
     title: "Quality Assurance Automation",
     eyebrow: "Capability — pipeline QA",
     tagline: "The QA discipline we embed in every pipeline we build — not a manufacturing-floor inspection product.",
-    lead: "Every data pipeline we build ships with independent reconciliation controls, deterministic calculations and full run lineage — the practice that makes a number defensible to Finance or to an inspector. We do not have an AI-driven manufacturing-quality or defect-detection product today, and we're not going to describe pipeline discipline as if it were one.",
+    lead: "Every data pipeline we build ships with independent reconciliation controls, deterministic calculations and full run lineage — the practice that makes a number defensible to Finance or to an inspector. This is pipeline quality discipline. Manufacturing-floor inspection is a separate capability, covered under Industrial Vision AI.",
     capabilities: [
       "Independent reconciliation controls (oracle vs. engine cross-checks)",
       "Hash-verified data lineage",
@@ -547,7 +553,7 @@ export const solutions: Solution[] = [
     title: "Legacy Application Modernisation",
     eyebrow: "Capability",
     tagline: "Reverse-engineer the spreadsheet that runs your month-end into a documented, tested pipeline — before anyone touches production.",
-    lead: "We take the Excel workbook, Access tool or SAP-export macro that's the only record of how a critical process actually works, and turn it into traced logic: every formula mapped to a rule, every ambiguous one logged for a decision instead of guessed. This is process modernisation from Excel/SAP-export to governed pipeline. We have no mainframe or legacy-codebase modernisation evidence, and we don't claim it.",
+    lead: "We take the Excel workbook, Access tool or SAP-export macro that's the only record of how a critical process actually works, and turn it into traced logic: every formula mapped to a rule, every ambiguous one logged for a decision instead of guessed. This is process modernisation from Excel and SAP-export tooling to governed pipeline. Mainframe and large legacy-codebase modernisation sit outside our current scope.",
     capabilities: [
       "Formula & business-rule reverse-engineering",
       "Decision logs for ambiguous rules",
@@ -574,8 +580,8 @@ export const solutions: Solution[] = [
     slug: "enterprise-ai-deployment",
     title: "Enterprise AI Deployment",
     eyebrow: "Capability — methodology",
-    tagline: "Moving AI past a prototype on someone's laptop into a secure, integrated, operationally usable enterprise system — deployed, not just demoed.",
-    lead: "A model answering questions in a chat window is a prototype. Getting that capability wired into your identity system, scoped to the documents a given role is allowed to see, logged for audit, cost-controlled and handed over with a runbook is a different piece of engineering entirely — and it's the piece most AI projects never reach. This page covers that methodology: enterprise knowledge assistants and RAG, AI agents and workflow automation, MCP-based enterprise integrations, model and API integration, deployment patterns across private cloud, public cloud and on-premises, identity and document-level permissions, observability and cost control, human approvals and audit trails, and production handover. This complements, rather than duplicates, our existing case study, \"Enterprise AI Deployment in Existing IT Environments\" — that case study shows the delivered deployment-shape pattern for one engagement; this page sets out the general methodology we apply across engagements. Our Medreich enterprise-MCP work (knowledge-assistant retrieval over AD-permissioned data via Gemini Enterprise and a Cloud Run MCP server) is a reference architecture we designed and proposed — it has not been implemented or deployed for that customer, and we don't describe it as live.",
+    tagline: "Moving AI from a prototype into a secure, integrated enterprise system — wired to your identity, logged for audit and handed over to run.",
+    lead: "A model answering questions in a chat window is a prototype. Getting that capability wired into your identity system, scoped to the documents a given role is allowed to see, logged for audit, cost-controlled and handed over with a runbook is a different piece of engineering entirely. This page covers that methodology: enterprise knowledge assistants and RAG, AI agents and workflow automation, MCP-based enterprise integrations, model and API integration, deployment patterns across private cloud, public cloud and on-premises, identity and document-level permissions, observability and cost control, human approvals and audit trails, and production handover. Below, the permission-aware knowledge-assistant design and the three deployment shapes we apply to an existing IT estate.",
     capabilities: [
       "Enterprise knowledge assistants & retrieval-augmented generation (RAG)",
       "AI agents & workflow automation",
@@ -603,13 +609,167 @@ export const solutions: Solution[] = [
       "A production handover a client's own team can run, not a system only we understand",
     ],
     pillar: "enterprise-ai-architecture-deployment",
+    detailCaseSlugs: ["enterprise-knowledge-intelligence-mcp", "enterprise-ai-deployment-existing-it"],
     deepDive: {
       prototypeVsPilotVsProduction: [
         { stage: "Prototype", detail: "Proves the model or approach can do the thing — usually a notebook, a demo script or a chat interface talking to a single data source, often on someone's laptop. No identity integration, no permission enforcement, no audit trail, no load or failure handling. Valuable for deciding whether to invest further; not something a buyer should mistake for a deployable system." },
         { stage: "Pilot", detail: "Runs with real users on real (or representative) data for a bounded period, usually behind basic access control but short of full production hardening — limited logging, a manual fallback, a small and known user group. The purpose of a pilot is to learn what breaks under real use before committing to the engineering cost of production hardening." },
-        { stage: "Production", detail: "Integrated with the client's actual identity provider and document-level permissions, logged and observable, cost-controlled, gated by human approval on any write or irreversible action, and handed over with a runbook and a named owner. This is the bar our enterprise AI deployment methodology is built to reach — and the bar our Medreich MCP reference architecture has been designed for but not yet built against." },
+        { stage: "Production", detail: "Integrated with the client's actual identity provider and document-level permissions, logged and observable, cost-controlled, gated by human approval on any write or irreversible action, and handed over with a runbook and a named owner. This is the bar our enterprise AI deployment methodology is built to reach." },
       ],
     },
+  },
+  {
+    slug: "manufacturing-operations-visibility",
+    title: "Manufacturing Operations Visibility & Optimisation",
+    eyebrow: "Solution — manufacturing",
+    tagline: "One governed view of plant output, equipment performance, quality, planning and material flow — built from the systems your plants already run.",
+    lead: "Plant data sits in MES, PLC historians, the ERP, quality records and spreadsheets, and each system answers a different question. We engineer the pipeline that brings those sources together under shared definitions: what OEE means on every line, how a scrap event links to a batch and a supplier lot, where a planned order is slipping and why. The output is a set of reconciled, traceable views that plant, quality and finance leaders can rely on, and a foundation for predictive maintenance and planning intelligence once that data is trusted.",
+    capabilities: [
+      "Manufacturing operations visibility across plant, line and shift",
+      "Assembly line visibility & throughput analysis",
+      "OEE and equipment performance intelligence",
+      "Production planning & scheduling intelligence",
+      "Quality & traceability intelligence from batch to supplier lot",
+      "Material flow & energy intelligence",
+      "Predictive maintenance on machine and maintenance-history data",
+    ],
+    workflow: [
+      { step: "Connect", detail: "Bring MES, historian, ERP and quality extracts into a versioned staging layer, starting with the sources that answer the first business question." },
+      { step: "Define", detail: "Agree the metric definitions with plant and finance stakeholders — OEE, scrap, yield, OTIF — once, in code, rather than per spreadsheet." },
+      { step: "Compute", detail: "Run the calculations in the data engine, with lineage from each figure back to its source records." },
+      { step: "Reconcile", detail: "Check the output against the reports leadership already trusts before anyone acts on it." },
+      { step: "Act", detail: "Surface exceptions ranked by a stated priority to a named owner, with recommendations drafted for human decision." },
+    ],
+    outcomes: [
+      "One definition of each operating metric, shared across plants and systems",
+      "Every figure traceable to the source records that produced it",
+      "Exceptions routed to a named owner, not buried in a weekly report",
+    ],
+    pillar: "ai-operations-automation",
+    deepDive: {
+      lifecycle: [
+        { stage: "Source systems", detail: "MES and line logs, PLC and historian signals where accessible, ERP production and inventory records, quality and batch records, maintenance history and shift rosters. We start from the sources that already exist, not from a new instrumentation project." },
+        { stage: "Ingestion", detail: "Scheduled extracts, API pulls or file drops land in a versioned staging layer. Signal data is aggregated to the grain the business questions need before it reaches analytics." },
+        { stage: "Standardisation", detail: "Shift, line, machine and product identifiers are mapped to one reference model, so the same asset has the same identity in every system." },
+        { stage: "Metric engine", detail: "OEE, scrap, yield, downtime attribution and OTIF are computed from written definitions, versioned and tested, with an independent check on each run." },
+        { stage: "Consumption", detail: "Plant, quality and finance leaders see the same figures through governed dashboards, and analytics or machine-learning workloads read from the same reconciled layer." },
+        { stage: "Rollout", detail: "Start with one line or one plant, prove the figures against existing reports, then extend to further lines and sites on the same definitions." },
+      ],
+      architectureDiagram: `
+ Sources                       Ingest & stage               Standardise & compute         Consume
+ ───────                       ──────────────               ─────────────────────         ───────
+ MES / line logs ─┐
+ PLC / historian ─┼──▶  versioned staging   ──▶  reference model  ──▶  metric engine  ──▶  plant dashboards
+ ERP production  ─┤     (raw, hash-checked)       (assets, products,    (OEE, scrap, yield,    quality traceability
+ Quality / batch ─┤                                shifts, lots)         OTIF, downtime)       planning views
+ Maintenance     ─┤                                                          │                 ML / predictive
+ Shift rosters   ─┘                                                          ▼                 maintenance
+                                                                   independent reconciliation
+                                                                   and lineage on every run`,
+      scenarios: [
+        {
+          name: "OEE and Equipment Performance",
+          businessQuestion: "Which lines lose the most output to availability, performance and quality losses, and are the figures the same across plants?",
+          dataSources: "MES and line logs, machine status signals, shift records, downtime codes",
+          approach: "One OEE definition, computed in the engine from logged states, with downtime attributed to a reason code and reconciled against existing shift reports",
+          platformOptions: "SQL Server or Postgres pipeline; Power BI for plant dashboards",
+          users: "Plant managers, operations directors",
+        },
+        {
+          name: "Assembly Line Visibility",
+          businessQuestion: "Where is throughput being lost on the line, and at which station does it start?",
+          dataSources: "Station cycle times, operator and line logs, takt and sequence data",
+          approach: "Station-level throughput and wait analysis, aggregated per shift, with exceptions ranked for the line engineer to investigate",
+          platformOptions: "SQL Server pipeline; a lakehouse where high-frequency station data needs joining at volume",
+          users: "Line engineers, production supervisors",
+        },
+        {
+          name: "Production Planning & Scheduling Intelligence",
+          businessQuestion: "Which planned orders are at risk, and what is the real capacity behind the schedule?",
+          dataSources: "ERP planned and released orders, capacity and routing data, actual completion records",
+          approach: "Compare planned against actual completion by order and resource, flag orders at risk of slipping, and show the constraint behind each one",
+          platformOptions: "SQL Server pipeline with ERP extracts; Fabric where planning reports already live in Power BI",
+          users: "Planners, production control, plant managers",
+        },
+        {
+          name: "Quality & Traceability",
+          businessQuestion: "Where are scrap and rework concentrated, and do they correlate with batch or supplier lot?",
+          dataSources: "Quality inspection records, batch genealogy, supplier lot data, scrap and rework logs",
+          approach: "Join quality events to batch and lot lineage, compute yield and defect-rate trends, and flag correlations for a quality engineer to investigate rather than conclude",
+          platformOptions: "SQL Server for structured QMS data; Databricks where batch-level sensor data needs joining at volume",
+          users: "Quality managers, process engineers",
+        },
+        {
+          name: "Material Flow & Energy Intelligence",
+          businessQuestion: "Where is material waiting, and where is energy use out of line with production?",
+          dataSources: "Inventory movements, goods receipts and issues, energy meter data, production volumes",
+          approach: "Calculate dwell time and stock ageing by location, and energy use per unit produced, with variance flagged against a stated baseline",
+          platformOptions: "SQL Server pipeline; Snowflake where multi-site consolidation is the requirement",
+          users: "Supply chain, plant engineering, energy managers",
+        },
+        {
+          name: "Predictive Maintenance",
+          businessQuestion: "Which machines are trending toward failure, and when should maintenance be scheduled?",
+          dataSources: "Machine telemetry, maintenance history, failure and repair records, operating conditions",
+          approach: "Time-series features on telemetry joined to maintenance records, producing a recommendation a reliability engineer reviews. The system never triggers a shutdown on its own",
+          platformOptions: "Databricks where telemetry volume and variety call for a lakehouse; SQL Server for a single-plant pilot of the maintenance-history analysis",
+          users: "Maintenance planners, reliability engineers",
+        },
+      ],
+    },
+  },
+  {
+    slug: "pharmaceutical-documentation-qa",
+    title: "Pharmaceutical Documentation & QA Assistant",
+    eyebrow: "Solution — life sciences",
+    tagline: "A drafting assistant for deviation and CAPA reports. It drafts and retrieves; a qualified reviewer decides.",
+    lead: "Deviation drafting starts from a blank page each time, and finding the similar case from six months ago depends on who remembers it. We design an assistant that suggests a classification, surfaces the most relevant historical deviations and drafts a root-cause narrative and CAPA outline. Every draft goes to a human QA reviewer, who edits, approves or rejects it. The system never disposes a deviation or approves a CAPA, and every draft is attributable to a model version, a prompt and the reviewer who acted on it.",
+    capabilities: [
+      "Deviation classification suggestions",
+      "Similar-case retrieval over historical deviation records",
+      "Root-cause and CAPA drafting for reviewer approval",
+      "Model version and prompt attribution on every draft",
+      "Immutable audit trail aligned to 21 CFR Part 11 and ALCOA+",
+    ],
+    workflow: [
+      { step: "Log", detail: "A deviation is logged in the QMS as it is today, with no change to how it is captured." },
+      { step: "Suggest", detail: "A classification is suggested as a proposal, not written into the record." },
+      { step: "Retrieve", detail: "Ranked historical deviations judged relevant to the new one are surfaced for review." },
+      { step: "Draft", detail: "A root-cause narrative and CAPA outline are drafted from the deviation text and the similar cases." },
+      { step: "Review", detail: "A qualified reviewer edits, approves or rejects. Only an approved draft enters the record, attributed to that reviewer." },
+    ],
+    outcomes: [
+      "Reviewers start from a structured first draft and the relevant prior cases",
+      "Nothing enters the quality record without a qualified human decision",
+      "Every draft attributable to a model version, prompt, reviewer and timestamp",
+    ],
+    pillar: "ai-operations-automation",
+    detailCaseSlugs: ["ai-assisted-pharmaceutical-documentation-qa"],
+  },
+  {
+    slug: "enterprise-ai-architecture",
+    title: "Enterprise AI Architecture",
+    eyebrow: "Capability — architecture",
+    tagline: "Attach AI to a governed data platform at the reporting layer, behind an identity boundary, with no second write path into the system of record.",
+    lead: "Enterprises that have built a governed data layer eventually ask whether an AI layer can sit on top of it without undoing the governance behind it. The answer depends on where the AI attaches. We place it at the reporting layer, reading only reconciled output, with identity and access management as an explicit boundary before any query reaches the platform. The design below shows the data layer, the boundary and the AI layer as one architecture, with the reasons for each placement.",
+    capabilities: [
+      "Attachment-point design for AI on governed data",
+      "Identity and access boundary between data and AI layers",
+      "Read-only reporting-layer integration",
+      "Human-review routing for any proposed action",
+    ],
+    workflow: [
+      { step: "Resolve identity", detail: "A request for analysis or drafting resolves through the identity boundary first." },
+      { step: "Read the reporting layer", detail: "The request reads only reconciled reporting output, never staging, core or calc." },
+      { step: "Return for review", detail: "The result is a draft or summary for a human, with no write path back into the platform." },
+    ],
+    outcomes: [
+      "Adding an AI layer does not loosen the governance the data layer was built to provide",
+      "The attachment point is decided before any model is given access",
+      "Every read attributable to the identity that made it",
+    ],
+    pillar: "enterprise-ai-architecture-deployment",
+    detailCaseSlugs: ["enterprise-data-ai-platform-architecture"],
   },
 ];
 
