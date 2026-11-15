@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { CALENDLY_URL } from "@/components/site/Nav";
 import { solutionBySlug, solutions, type Solution } from "@/data/solutions";
+import { pillarBySlug } from "@/data/pillars";
 
 export const Route = createFileRoute("/solutions/$slug")({
   loader: ({ params }) => {
@@ -36,6 +37,7 @@ export const Route = createFileRoute("/solutions/$slug")({
 function SolutionPage() {
   const { s } = Route.useLoaderData() as { s: Solution };
   const others = solutions.filter((x) => x.slug !== s.slug).slice(0, 3);
+  const pillar = s.pillar ? pillarBySlug(s.pillar) : undefined;
   return (
     <SiteLayout>
       <PageHero
@@ -43,6 +45,11 @@ function SolutionPage() {
         title={s.title}
         lead={s.tagline}
       >
+        {pillar ? (
+          <Link to="/capabilities/$slug" params={{ slug: pillar.slug }} className="mt-4 inline-flex items-center gap-2 text-sm text-purple-soft hover:text-white transition-colors">
+            Part of the {pillar.name} pillar →
+          </Link>
+        ) : null}
         <div className="mt-10 flex gap-3">
           <a href={CALENDLY_URL} target="_blank" rel="noreferrer" className="btn-primary">Book a Strategy Call</a>
           <Link to="/solutions" className="btn-ghost">All solutions</Link>

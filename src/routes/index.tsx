@@ -11,9 +11,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Baseline AI — From complexity to intelligence" },
-      { name: "description", content: "Baseline AI is an AI engineering and automation studio. We design and deploy intelligent systems that transform how businesses operate." },
+      { name: "description", content: "Baseline AI by Leadryze is an enterprise AI engineering, data engineering and intelligent operations partner for manufacturers, pharmaceutical plants and automotive suppliers." },
       { property: "og:title", content: "Baseline AI — From complexity to intelligence" },
-      { property: "og:description", content: "We design and deploy intelligent systems that transform how businesses operate." },
+      { property: "og:description", content: "We design and deploy the AI-native systems manufacturers, pharmaceutical plants and automotive suppliers run their operations on." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -54,7 +54,7 @@ function Hero() {
         </Reveal>
         <Reveal delay={240}>
           <p className="mt-8 max-w-xl text-balance text-base md:text-lg text-muted-foreground">
-            We design and deploy intelligent systems that transform how businesses operate.
+            We design and deploy the AI-native systems manufacturers, pharmaceutical plants and automotive suppliers run their operations on.
           </p>
         </Reveal>
         <Reveal delay={360}>
@@ -80,9 +80,9 @@ function Hero() {
 /* ---------------- SELECTED WORK ---------------- */
 function SelectedWork() {
   const proof = [
-    { m: "25+ HOURS", l: "Saved monthly" },
-    { m: "AUTOMATED", l: "Financial intelligence" },
-    { m: "SURFACED", l: "Previously hidden charge leakage" },
+    { m: "17,061 FORMULAS", l: "Reverse-engineered into one deterministic engine" },
+    { m: "858 TESTS", l: "Backing the calculation engine, automated" },
+    { m: "18 OF 29 COLUMNS", l: "Reconciled exactly against the customer's own workbook" },
   ];
   return (
     <section className="relative py-32 md:py-48 overflow-hidden border-t border-white/5">
@@ -102,22 +102,22 @@ function SelectedWork() {
         </Reveal>
         <Reveal delay={100}>
           <h2 className="text-display mt-6 text-5xl md:text-7xl max-w-4xl">
-            25+ HOURS
+            A SPREADSHEET
             <br />
-            <span className="text-muted-foreground">GIVEN BACK.</span>
+            <span className="text-muted-foreground">BECOMES AN ENGINE.</span>
           </h2>
         </Reveal>
 
         <div className="mt-16 grid gap-12 md:grid-cols-[1.1fr_1fr] items-start">
           <div>
             <Reveal delay={140}>
-              <div className="text-eyebrow">Financial Intelligence System</div>
+              <div className="text-eyebrow">Manufacturing Intelligence Platform</div>
             </Reveal>
             <Reveal delay={200}>
               <p className="mt-6 text-lg text-muted-foreground max-w-xl">
-                We transformed fragmented financial data across inboxes, statements and
-                transactions into one intelligent system — automating financial organization
-                and surfacing previously hidden bank-charge leakage.
+                A pharmaceutical manufacturer's month-end reporting ran on a 25-tab workbook
+                no one could fully audit. We reverse-engineered it into a deterministic SQL
+                Server engine — every rule traced, every number reconciled.
               </p>
             </Reveal>
             <Reveal delay={280}>
