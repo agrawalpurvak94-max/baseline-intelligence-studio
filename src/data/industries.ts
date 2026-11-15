@@ -22,14 +22,14 @@ export const industries: Industry[] = [
     slug: "manufacturing",
     name: "Manufacturing",
     featured: true,
-    hero: "SAP, Excel and the shop floor — reconciled into one number you can trust.",
-    lead: "Most mid-size plants run SAP and the shop floor as two separate truths, bridged once a month by hand in Excel. We build the layer that makes them agree: a plant MIS that reconciles to SAP, inventory intelligence that explains its exceptions instead of just listing them, and governed agents that draft the answer before someone has to assemble it.",
+    hero: "ERP exports, Excel and the shop floor — reconciled into one number you can trust.",
+    lead: "Most mid-size plants run their ERP and the shop floor as two separate truths, bridged once a month by hand in Excel. We build the layer that makes them agree: a plant MIS that reconciles to SAP or whatever ERP you run, inventory intelligence that explains its exceptions instead of just listing them, and governed agents that draft the answer before someone has to assemble it.",
     pains: [
       "The daily production and OEE number is hand-logged at shift end, not computed from source",
       "SAP trial-balance and inventory data get exported, then rebuilt by hand into the monthly report",
       "MRP throws hundreds of exception messages a week, and planners triage by gut",
       "Slow-moving and obsolete stock sits unflagged until someone notices at month-end",
-      "Vendor OTIF is chased over email and WhatsApp, disconnected from what SAP already knows",
+      "Vendor OTIF is chased over email and WhatsApp, disconnected from what the ERP already knows",
       "The ERP is over-customised, and standardising anything feels risky",
     ],
     opportunities: [
@@ -48,14 +48,14 @@ export const industries: Industry[] = [
     ],
     after: [
       "One reconciled management report, computed once and checked against an independent path",
-      "A daily number traced back to the SAP or shop-floor record it came from",
+      "A daily number traced back to the ERP or shop-floor record it came from",
       "Exceptions grouped and ranked by a rule you can see, not a feeling",
     ],
     pov: {
       broken:
-        "Most mid-size manufacturers run SAP ECC and the plant floor as two separate truths, reconciled by hand once a month in a workbook nobody but its author fully understands. AI vendors answer with a chat-your-data demo that skips the actual mess underneath: the exports, the Z-reports, the reconciliation nobody currently trusts enough to automate blind.",
+        "Most mid-size manufacturers run their core ERP — often SAP ECC or S/4HANA — and the plant floor as two separate truths, reconciled by hand once a month in a workbook nobody but its author fully understands. AI vendors answer with a chat-your-data demo that skips the actual mess underneath: the exports, the Z-reports, the reconciliation nobody currently trusts enough to automate blind.",
       different:
-        "We start from the export your team already pulls, not a platform migration or a new SAP module. Every number the system produces is computed once and checked against an independent calculation path before anyone reports on it. We hand over the audit trail and the decision log alongside the dashboard, not instead of it.",
+        "We start from the export your team already pulls, not a platform migration or a new ERP module. Every number the system produces is computed once and checked against an independent calculation path before anyone reports on it. We hand over the audit trail and the decision log alongside the dashboard, not instead of it.",
       boundary:
         "We don't replace your ERP, MES or QMS, and we don't make unreviewed changes to a validated system. Everything we build defaults to read-only. Any action that writes back to a system of record needs an explicit human approval step and leaves an audit trail — by design, not by policy we hope holds.",
     },
@@ -64,7 +64,7 @@ export const industries: Industry[] = [
         pain: "OEE and daily production numbers are hand-logged at shift end, then re-typed into Excel",
         practice: "Enterprise Data Engineering",
         outcome:
-          "Every number is computed once, in a versioned pipeline, traced back to the SAP or shop-floor record it came from — not re-typed.",
+          "Every number is computed once, in a versioned pipeline, traced back to the ERP or shop-floor record it came from — not re-typed.",
       },
       {
         pain: "SAP trial-balance and inventory data are exported, then rebuilt by hand into the monthly management report",
@@ -79,10 +79,10 @@ export const industries: Industry[] = [
           "Exceptions are grouped and ranked by a stated rule, not a model's mood — every ranking traceable to the rule that produced it.",
       },
       {
-        pain: "Vendor OTIF and chasing live in email and WhatsApp, disconnected from SAP",
+        pain: "Vendor OTIF and chasing live in email and WhatsApp, disconnected from the ERP",
         practice: "Intelligent Process Automation",
         outcome:
-          "OTIF is computed from SAP schedule-line and goods-receipt data, with chaser drafts a human sends — not a bot that emails your vendors.",
+          "OTIF is computed from ERP schedule-line and goods-receipt data, with chaser drafts a human sends — not a bot that emails your vendors.",
       },
       {
         pain: "A 25-tab, 17,000-formula workbook is the only documentation of how month-end close actually works",
@@ -94,12 +94,12 @@ export const industries: Industry[] = [
         pain: "Leadership wants to ask the plant a question instead of waiting for next week's report",
         practice: "Enterprise AI & Agentic Systems",
         outcome:
-          "A read-only agent answers from governed metric definitions with its query shown — it drafts, people decide, and nothing writes back to SAP without approval.",
+          "A read-only agent answers from governed metric definitions with its query shown — it drafts, people decide, and nothing writes back to the ERP without approval.",
       },
     ],
     faq: [
       {
-        q: "Will this touch our validated or production SAP system?",
+        q: "Will this touch our validated or production ERP system (SAP or otherwise)?",
         a: "No, by default. We extract read-only — delta-based, off-peak, from a scoped service account — and don't write custom ABAP into your core. Anything that would ever write back to SAP sits behind an explicit approval step.",
       },
       {
@@ -112,7 +112,7 @@ export const industries: Industry[] = [
       },
       {
         q: "Will our operators need to type more into another system?",
-        a: "Depends on what we're solving. We start from SAP, MES and whatever shift logs already exist rather than adding a new data-entry burden by default, and we say upfront when a use case genuinely needs new capture.",
+        a: "Depends on what we're solving. We start from your ERP, MES and whatever shift logs already exist rather than adding a new data-entry burden by default, and we say upfront when a use case genuinely needs new capture.",
       },
       {
         q: "What's the first deliverable, and how fast?",
@@ -254,14 +254,14 @@ export const industries: Industry[] = [
     slug: "automotive-mobility",
     name: "Automotive & Mobility",
     featured: true,
-    hero: "PPM, OTIF and traceability — read straight from SAP, not rebuilt from memory.",
-    lead: "Tier-1 and Tier-2 suppliers live on customer scorecards, PPAP paperwork and schedule volatility. We build the layer that turns SAP, quality and dispatch data into a scorecard you can defend before the customer calls.",
+    hero: "PPM, OTIF and traceability — read straight from your ERP and quality systems, not rebuilt from memory.",
+    lead: "Tier-1 and Tier-2 suppliers live on customer scorecards, PPAP paperwork and schedule volatility. We build the layer that turns ERP, quality and dispatch data into a scorecard you can defend before the customer calls.",
     pains: [
       "Customer scorecards — PPM, OTIF, premium freight — get assembled by hand before every review",
       "PPAP/APQP documentation load slows down SOP dates",
       "Schedule changes and call-offs hit MRP faster than planners can re-plan",
       "SPC data sits stranded in CMMs and Excel, disconnected from the ERP lot",
-      "Traceability from raw material to shipment spans SAP, MES and paper",
+      "Traceability from raw material to shipment spans ERP, MES and paper",
       "Tier-2 suppliers lag Tier-1 on IATF depth and digitisation, and it shows at audit",
     ],
     opportunities: [
@@ -270,10 +270,10 @@ export const industries: Industry[] = [
       "Traceability & recall-readiness layer",
       "SPC analytics tied to ERP lots",
       "PPAP/APQP document assembly",
-      "SAP data integration & analytics",
+      "ERP & quality-system data integration",
     ],
     before: [
-      "Scorecard built by hand from SAP, quality and dispatch exports",
+      "Scorecard built by hand from ERP, quality and dispatch exports",
       "SPC data stuck in the CMM, disconnected from the ERP lot",
       "A schedule change means a planner manually re-checking MRP",
     ],
@@ -284,18 +284,18 @@ export const industries: Industry[] = [
     ],
     pov: {
       broken:
-        "A scorecard breach or a quality escape usually surfaces after the fact — assembled the night before the review from a dispatch export, a quality system and SAP, each pulled by hand. Vision and AI vendors mostly sell the camera station; almost nobody connects it to the ERP lot, the control plan, or the recall drill that actually matters when something goes wrong.",
+        "A scorecard breach or a quality escape usually surfaces after the fact — assembled the night before the review from a dispatch export, a quality system and the ERP, each pulled by hand. Vision and AI vendors mostly sell the camera station; almost nobody connects it to the ERP lot, the control plan, or the recall drill that actually matters when something goes wrong.",
       different:
-        "We start from the SAP and quality data already in your systems and make the scorecard, the traceability chain and the exception list reconcile to it — before any vision or sensor layer gets added.",
+        "We start from the ERP and quality data already in your systems and make the scorecard, the traceability chain and the exception list reconcile to it — before any vision or sensor layer gets added.",
       boundary:
         "We don't put an unvalidated AI vision system into a customer's control plan, and we don't replace the SPC/MSA tooling your IATF audits already trust. Where vision comes up, it's a feasibility exercise with your quality team's sign-off built in from the start — not a drop-in inspection product we're selling you.",
     },
     painPracticeOutcome: [
       {
-        pain: "Customer scorecards are assembled by hand from SAP, quality and dispatch data before every review",
-        practice: "SAP Data Integration & Analytics",
+        pain: "Customer scorecards are assembled by hand from ERP, quality and dispatch data before every review",
+        practice: "ERP Data Integration & Analytics",
         outcome:
-          "PPM, OTIF and premium freight are computed from the same SAP schedule-line and goods-receipt data every time, with drill-down to the lot or line that caused it.",
+          "PPM, OTIF and premium freight are computed from the same ERP schedule-line and goods-receipt data every time, with drill-down to the lot or line that caused it.",
       },
       {
         pain: "Schedule changes and call-offs outrun a planner's ability to re-check MRP by hand",
@@ -304,7 +304,7 @@ export const industries: Industry[] = [
           "Impact on material and capacity is computed and drafted for the planner to review — the planner still decides; nothing auto-orders.",
       },
       {
-        pain: "Traceability runs across SAP, MES and paper, and a recall drill means a manual search",
+        pain: "Traceability runs across ERP, MES and paper, and a recall drill means a manual search",
         practice: "Enterprise Data Engineering",
         outcome:
           "Lot and serial genealogy is modelled once, versioned and queryable — a recall-readiness check becomes a query, not a scramble.",
@@ -329,19 +329,19 @@ export const industries: Industry[] = [
       },
       {
         q: "Our SPC tools already work — why touch them?",
-        a: "We're not replacing them. We tie their output back to the ERP lot so Cpk and your SAP data agree, instead of living in two places that drift apart.",
+        a: "We're not replacing them. We tie their output back to the ERP lot so Cpk and your ERP data agree, instead of living in two places that drift apart.",
       },
       {
         q: "How fast can we produce a suspect-lot list in a recall drill?",
         a: "That depends on how clean your traceability data already is. The real first step is modelling the genealogy chain once — after that, a recall drill becomes a query instead of a multi-system search. We're not going to put an unsourced speed number against this.",
       },
       {
-        q: "Does this touch our SAP system or MRP directly?",
+        q: "Does this touch our ERP system or MRP directly?",
         a: "Read-only by default. Schedule-change impact goes to a planner as a draft; nothing auto-places or changes an order without an approval step.",
       },
       {
         q: "We're a Tier-2 without a big IT team — is this out of our league?",
-        a: "No — this is built for exactly that gap. It starts from the SAP and Excel you already run, not a platform purchase you'd need a bigger team to manage.",
+        a: "No — this is built for exactly that gap. It starts from the ERP and Excel you already run, not a platform purchase you'd need a bigger team to manage.",
       },
       {
         q: "What about EDI 830/862 schedule feeds from our OEM?",
@@ -349,7 +349,7 @@ export const industries: Industry[] = [
       },
     ],
     notAFit:
-      "If you need a camera-and-PLC inspection system shipped and warranted by a single vendor on day one, that's a hardware-and-vision specialist's job — we'd rather point you there than pretend we're that vendor. And if your SAP or quality data isn't extractable at all yet — genuinely paper-only — the digitisation step has to come before a scorecard or traceability layer makes sense.",
+      "If you need a camera-and-PLC inspection system shipped and warranted by a single vendor on day one, that's a hardware-and-vision specialist's job — we'd rather point you there than pretend we're that vendor. And if your ERP or quality data isn't extractable at all yet — genuinely paper-only — the digitisation step has to come before a scorecard or traceability layer makes sense.",
     caseStudies: ["industrial-ai-vision-manufacturing-quality"],
     relatedCapabilities: [
       "sap-data-integration-analytics",
@@ -364,9 +364,9 @@ export const industries: Industry[] = [
     name: "Industrial Equipment & OEM Suppliers",
     featured: true,
     hero: "MRP exceptions and inventory reconciliation, turned into one governed report.",
-    lead: "Tier-1/2 precision and component manufacturers run month-end inventory and MRP out of SAP exports and Excel. We build the calculation engine and reconciliation layer that makes those numbers defensible to Finance — without touching your live SAP system.",
+    lead: "Tier-1/2 precision and component manufacturers run month-end inventory and MRP out of ERP exports (commonly SAP) and Excel. We build the calculation engine and reconciliation layer that makes those numbers defensible to Finance — without touching your live ERP system.",
     pains: [
-      "Month-end inventory ageing, holding and valuation are rebuilt by hand from SAP exports",
+      "Month-end inventory ageing, holding and valuation are rebuilt by hand from ERP exports",
       "MRP exceptions pile up faster than planners can triage them by gut",
       "Stock accuracy drifts from backflush errors and substitutions, unflagged until month-end",
       "Operational reports are a patchwork of Excel macros one person understands",
@@ -374,7 +374,7 @@ export const industries: Industry[] = [
       "Finance questions a number and nobody can show exactly how it was calculated",
     ],
     opportunities: [
-      "SAP data integration & analytics",
+      "ERP data integration & analytics",
       "Inventory & MRP exception intelligence",
       "Enterprise data engineering",
       "Legacy application modernisation",
@@ -382,7 +382,7 @@ export const industries: Industry[] = [
       "Enterprise AI & agentic systems",
     ],
     before: [
-      "Inventory ageing rebuilt by hand from four separate SAP exports",
+      "Inventory ageing rebuilt by hand from four separate ERP exports",
       "MRP exceptions triaged by gut feel, no stated priority",
       "A legacy Excel macro is the only record of how a report is built",
     ],
@@ -393,16 +393,16 @@ export const industries: Industry[] = [
     ],
     pov: {
       broken:
-        "Inventory and MRP reporting at most OEM and component suppliers runs on SAP exports rebuilt in Excel by whoever inherited the spreadsheet. The logic lives in formulas, not documentation, and every month-end close is one formula error away from a number Finance can't defend.",
+        "Inventory and MRP reporting at most OEM and component suppliers runs on ERP exports — commonly SAP — rebuilt in Excel by whoever inherited the spreadsheet. The logic lives in formulas, not documentation, and every month-end close is one formula error away from a number Finance can't defend.",
       different:
         "We reverse-engineer the existing workbook into a tested, documented pipeline before we change anything, then run the two side by side until they agree. Finance signs off on reconciliation, not a leap of faith.",
       boundary:
-        "We work from SAP export files, not a live SAP system connection — that's the honest scope today. We don't post anything back into SAP, and we don't touch MRP parameters without a human approving the change.",
+        "We work from your ERP's export files (commonly SAP), not a live system connection — that's the honest scope today. We don't post anything back into your ERP, and we don't touch MRP parameters without a human approving the change.",
     },
     painPracticeOutcome: [
       {
-        pain: "Month-end inventory ageing, holding and valuation are rebuilt by hand from SAP exports",
-        practice: "SAP Data Integration & Analytics",
+        pain: "Month-end inventory ageing, holding and valuation are rebuilt by hand from ERP exports",
+        practice: "ERP Data Integration & Analytics",
         outcome:
           "A SQL Server engine computes the same report families from the same exports, reconciled column by column against the workbook it replaces.",
       },
@@ -432,8 +432,8 @@ export const industries: Industry[] = [
     ],
     faq: [
       {
-        q: "Does this connect to our live SAP system?",
-        a: "Not yet. Today it's SAP-export driven. Live SAP integration — OData or RFC — is on our roadmap, not something we've delivered, and we'll keep saying that plainly rather than let \"SAP data integration\" imply more.",
+        q: "Does this connect to our live ERP system?",
+        a: "Not yet. Today it's ERP-export driven (commonly SAP). Live ERP integration — OData, RFC, or an equivalent API — is on our roadmap, not something we've delivered, and we'll keep saying that plainly rather than let \"ERP data integration\" imply more.",
       },
       {
         q: "What happens to the old Excel workbook?",
@@ -457,7 +457,7 @@ export const industries: Industry[] = [
       },
     ],
     notAFit:
-      "If you need live SAP posting or OData/RFC integration today, say so clearly: that's not delivered yet, and we won't oversell it. And if the goal is really a platform purchase — a new MRP or MES module — start with that vendor; come back to us for the reconciliation and governance layer around whatever you choose.",
+      "If you need live ERP posting or OData/RFC integration today, say so clearly: that's not delivered yet, and we won't oversell it. And if the goal is really a platform purchase — a new MRP or MES module — start with that vendor; come back to us for the reconciliation and governance layer around whatever you choose.",
     caseStudies: [
       "intelligent-inventory-reconciliation",
       "spreadsheet-to-intelligent-business-applications",

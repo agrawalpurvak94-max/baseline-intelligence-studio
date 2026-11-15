@@ -107,6 +107,122 @@ function SolutionPage() {
         </ul>
       </section>
 
+      {s.deepDive?.lifecycle && s.deepDive.lifecycle.length > 0 ? (
+        <section className="container-x py-20 border-t border-white/5">
+          <Reveal>
+            <h2 className="text-display text-3xl md:text-5xl max-w-3xl">The engineering lifecycle</h2>
+          </Reveal>
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {s.deepDive.lifecycle.map((l, i) => (
+              <Reveal key={l.stage} delay={i * 50}>
+                <div className="card-dark p-5 h-full">
+                  <div className="text-eyebrow text-purple-soft">0{i + 1}</div>
+                  <div className="mt-3 text-display text-lg">{l.stage}</div>
+                  <p className="mt-2 text-sm text-muted-foreground">{l.detail}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {s.deepDive?.architectureDiagram ? (
+        <section className="container-x py-10">
+          <Reveal>
+            <div className="rounded-3xl hairline surface-1 p-6 md:p-10">
+              <div className="text-eyebrow mb-6">Architecture</div>
+              <pre className="overflow-x-auto text-[11px] md:text-xs leading-relaxed font-mono text-foreground/80 whitespace-pre">
+                {s.deepDive.architectureDiagram}
+              </pre>
+            </div>
+          </Reveal>
+        </section>
+      ) : null}
+
+      {s.deepDive?.platforms && s.deepDive.platforms.length > 0 ? (
+        <section className="container-x py-20 border-t border-white/5">
+          <Reveal>
+            <h2 className="text-display text-3xl md:text-5xl max-w-3xl">Modern Manufacturing Data Platforms</h2>
+          </Reveal>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {s.deepDive.platforms.map((p, i) => (
+              <Reveal key={p.name} delay={i * 60}>
+                <div className="card-dark p-6 h-full flex flex-col">
+                  <div className="text-display text-xl">{p.name}</div>
+                  <p className="mt-3 text-sm text-foreground/85">{p.when}</p>
+                  <ul className="mt-4 space-y-2 text-sm text-foreground/80 flex-1">
+                    {p.useCases.map((u) => (
+                      <li key={u} className="flex items-start gap-2"><span className="h-1 w-1 mt-2 rounded-full bg-purple shrink-0" />{u}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 pt-4 border-t border-white/5">
+                    <div className="text-eyebrow text-[0.62rem]">Evidence status</div>
+                    <p className="mt-2 text-xs text-muted-foreground">{p.evidenceNote}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {s.deepDive?.selectionFramework && s.deepDive.selectionFramework.length > 0 ? (
+        <section className="container-x py-20">
+          <Reveal>
+            <div className="rounded-3xl hairline surface-1 p-6 md:p-10">
+              <div className="text-eyebrow mb-6">Platform selection framework</div>
+              <ul className="space-y-3 text-sm text-foreground/85">
+                {s.deepDive.selectionFramework.map((f) => (
+                  <li key={f} className="flex items-start gap-2"><span className="h-1 w-1 mt-2 rounded-full bg-purple shrink-0" />{f}</li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </section>
+      ) : null}
+
+      {s.deepDive?.scenarios && s.deepDive.scenarios.length > 0 ? (
+        <section className="container-x py-20 border-t border-white/5">
+          <Reveal>
+            <h2 className="text-display text-3xl md:text-5xl max-w-3xl">Practical manufacturing scenarios</h2>
+          </Reveal>
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {s.deepDive.scenarios.map((sc, i) => (
+              <Reveal key={sc.name} delay={i * 50}>
+                <div className="card-dark p-6 h-full">
+                  <div className="text-display text-lg">{sc.name}</div>
+                  <p className="mt-2 text-sm text-foreground/90">{sc.businessQuestion}</p>
+                  <dl className="mt-4 space-y-2 text-xs text-muted-foreground">
+                    <div><dt className="text-eyebrow text-[0.6rem] inline">Data sources: </dt><dd className="inline">{sc.dataSources}</dd></div>
+                    <div><dt className="text-eyebrow text-[0.6rem] inline">Approach: </dt><dd className="inline">{sc.approach}</dd></div>
+                    <div><dt className="text-eyebrow text-[0.6rem] inline">Platform options: </dt><dd className="inline">{sc.platformOptions}</dd></div>
+                    <div><dt className="text-eyebrow text-[0.6rem] inline">Users: </dt><dd className="inline">{sc.users}</dd></div>
+                  </dl>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {s.deepDive?.prototypeVsPilotVsProduction && s.deepDive.prototypeVsPilotVsProduction.length > 0 ? (
+        <section className="container-x py-20 border-t border-white/5">
+          <Reveal>
+            <h2 className="text-display text-3xl md:text-5xl max-w-3xl">Prototype, pilot, production</h2>
+          </Reveal>
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {s.deepDive.prototypeVsPilotVsProduction.map((p, i) => (
+              <Reveal key={p.stage} delay={i * 60}>
+                <div className="card-dark p-6 h-full">
+                  <div className="text-eyebrow text-purple-soft">{p.stage}</div>
+                  <p className="mt-3 text-sm text-foreground/85">{p.detail}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       <section className="container-x py-20 border-t border-white/5">
         <div className="text-eyebrow">More solutions</div>
         <div className="mt-6 grid gap-4 md:grid-cols-3">

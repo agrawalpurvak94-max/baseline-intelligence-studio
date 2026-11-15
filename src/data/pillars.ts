@@ -52,7 +52,7 @@ export const pillars: Pillar[] = [
     name: "AI Engineering",
     eyebrow: "Pillar",
     tagline: "Permission-aware tools, anomaly-first vision, and agents that draft and retrieve — a human still decides and still acts.",
-    lead: "We build the systems that let AI reason over enterprise data and signals without becoming the thing nobody can audit: MCP tool layers scoped narrow and read-only-first, computer vision designed around the anomaly rather than a dataset of defects nobody has yet, and agents that retrieve from governed data and draft the next step for a named reviewer to approve. Nothing acts on a production system without a human in the loop.",
+    lead: "We build the systems that let AI reason over enterprise data and signals without becoming the thing nobody can audit: MCP tool layers scoped narrow and read-only-first, industrial computer vision — quality inspection, packaging and labelling verification, assembly checks, PPE and line monitoring, anomaly detection — designed around the engineering lifecycle rather than a dataset of defects nobody has yet, and agents that retrieve from governed data and draft the next step for a named reviewer to approve. Nothing acts on a production system without a human in the loop.",
     capabilities: [
       "Permission-aware MCP tool design (read-only-first, AD/identity-scoped)",
       "Governed retrieval over plant, SAP and QMS data for agent drafting",
@@ -150,7 +150,7 @@ export const pillars: Pillar[] = [
     name: "Enterprise AI Architecture and Deployment",
     eyebrow: "Pillar",
     tagline: "How AI attaches to an estate you already run — identity-aware, network-aware, held to the same operational bar as everything else in production.",
-    lead: "We design AI deployments that reuse your existing AD/IAM rather than inventing a parallel one, respect your existing network boundary rather than routing around it, and are held to the same monitoring, observability and rollback standard your other production systems already meet — across on-premise, hybrid, and cloud-native deployment shapes on AWS, Azure or GCP, matched to the estate you've already built.",
+    lead: "We help organisations move AI use cases beyond a laptop prototype into secure, integrated, operationally usable enterprise systems: knowledge assistants and RAG, agents and workflow automation, MCP-based integrations, deployed across on-premise, hybrid, and cloud-native shapes on AWS, Azure or GCP. Every deployment reuses your existing AD/IAM rather than inventing a parallel one, respects your existing network boundary rather than routing around it, and is held to the same monitoring, observability and rollback standard your other production systems already meet.",
     capabilities: [
       "Enterprise AI architecture across on-premise, hybrid and cloud-native shapes",
       "AWS, Azure and GCP deployment patterns for AI workloads",
@@ -171,7 +171,7 @@ export const pillars: Pillar[] = [
       "No AI workload goes live without a monitored path and a tested rollback",
       "A deployment shape matched to the estate the client already has, not a default we push regardless",
     ],
-    solutionSlugs: [],
+    solutionSlugs: ["enterprise-ai-deployment"],
     caseStudySlugs: [
       "enterprise-ai-deployment-existing-it",
       "enterprise-data-ai-platform-architecture",

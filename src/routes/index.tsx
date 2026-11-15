@@ -54,7 +54,7 @@ function Hero() {
         </Reveal>
         <Reveal delay={240}>
           <p className="mt-8 max-w-xl text-balance text-base md:text-lg text-muted-foreground">
-            We design and deploy the AI-native systems manufacturers, pharmaceutical plants and automotive suppliers run their operations on.
+            We build the data engineering, AI engineering and intelligent automation that manufacturers, pharmaceutical plants and automotive suppliers run their operations on.
           </p>
         </Reveal>
         <Reveal delay={360}>

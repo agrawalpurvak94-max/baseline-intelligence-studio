@@ -153,7 +153,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     sections: {
       businessContext:
-        "Manufacturers running SAP close financial and operational periods against data that leaves SAP as a file and lands wherever the next person puts it — a shared drive, a workbook, a one-off staging table. Two of our delivered engines (a finance MIS rebuild and an inventory reconciliation build, both for manufacturers, both on SQL Server) share the same underlying data foundation: a layered schema and a versioned migration discipline, not a one-off script per report. This page describes that foundation as a pattern on its own terms, independent of either delivery.",
+        "Manufacturers running an ERP such as SAP close financial and operational periods against data that leaves the ERP as a file and lands wherever the next person puts it — a shared drive, a workbook, a one-off staging table. Two of our delivered engines (a finance MIS rebuild and an inventory reconciliation build, both for manufacturers, both on SQL Server) share the same underlying data foundation: a layered schema and a versioned migration discipline, not a one-off script per report. This page describes that foundation as a pattern on its own terms, independent of either delivery.",
       operationalProblem:
         "A report pipeline built report-by-report accumulates staging tables with no shared shape, migrations nobody tracked, and no agreed place to put a lookup value versus a calculated one. Every new report family means a new ad hoc table, and nobody can say with confidence which table fed which number six months later.",
       whyInsufficient:
@@ -527,7 +527,7 @@ export const caseStudies: CaseStudy[] = [
     pillar: "ai-engineering",
     disclosure: DISCLOSURE.illustrative,
     architecture: [
-      "SAP: PO / GRN / invoice / QM data (read-only)",
+      "ERP: PO / GRN / invoice / QM data (read-only)",
       "Exception Intake Agent",
       "Three-Way-Match & Quality-Hold Agent",
       "Vendor/Internal Query Drafting Agent",
@@ -536,16 +536,16 @@ export const caseStudies: CaseStudy[] = [
     ],
     sections: {
       businessContext:
-        "A mid-size manufacturer buys raw material and components against purchase orders raised in SAP, receives them against a goods-receipt note, and pays against a matching invoice — the standard three-way match. When all three agree, payment is routine. When they don't — a price variance, a quantity short-ship, a late invoice, or a quality hold on incoming material — someone in Procurement, Finance, or Quality has to chase it down, today over email, with no shared view of where a given exception actually is. No manufacturer named or implied in this scenario is a real client.",
+        "A mid-size manufacturer buys raw material and components against purchase orders raised in its ERP (commonly SAP), receives them against a goods-receipt note, and pays against a matching invoice — the standard three-way match. When all three agree, payment is routine. When they don't — a price variance, a quantity short-ship, a late invoice, or a quality hold on incoming material — someone in Procurement, Finance, or Quality has to chase it down, today over email, with no shared view of where a given exception actually is. No manufacturer named or implied in this scenario is a real client.",
       operationalProblem:
         "A purchase-to-pay exception touches three functions that don't share a single queue: Procurement knows the PO and vendor history, Finance knows the invoice and payment terms, Quality knows whether an incoming-material hold is still open. An exception sits in whichever inbox someone last looked at, and a payment can get released before a quality hold clears, or held indefinitely after a hold has actually been lifted, simply because nobody connected the two events.",
       whyInsufficient:
         "A shared spreadsheet or a generic ticketing queue can hold the exception list, but someone still has to read each PO, GRN, and invoice, decide what kind of exception it is, check whether a quality hold applies, and draft whatever chaser email or clarification is needed — the triage work, not just the tracking, is what consumes the time. Automating the match itself is good practice, but it doesn't handle the judgment calls: is this variance within tolerance, is this vendor worth chasing by phone instead of email, does this hold block payment or just the goods-receipt step.",
       proposedSolution:
-        "A small set of narrowly scoped agents, each with read access to specific SAP data and a specific, limited action it can take, cooperating on one exception queue, with a named human approver who must sign off before anything the agents propose leaves the sandbox — before a vendor email sends, before a PO amendment is applied, before a payment batch releases. No agent in this pattern has standing write access to SAP; every write is a human-approved action the agent prepares but does not execute. Gartner's research puts the agentic-AI failure rate in context: more than 40% of agentic AI projects are expected to be cancelled before the end of 2027, largely over unclear value and inadequate risk controls — that finding shapes this design directly. Every agent below has a narrow tool scope and a human checkpoint before anything leaves the sandbox, not broad autonomy for its own sake.",
+        "A small set of narrowly scoped agents, each with read access to specific ERP data and a specific, limited action it can take, cooperating on one exception queue, with a named human approver who must sign off before anything the agents propose leaves the sandbox — before a vendor email sends, before a PO amendment is applied, before a payment batch releases. No agent in this pattern has standing write access to the ERP; every write is a human-approved action the agent prepares but does not execute. Gartner's research puts the agentic-AI failure rate in context: more than 40% of agentic AI projects are expected to be cancelled before the end of 2027, largely over unclear value and inadequate risk controls — that finding shapes this design directly. Every agent below has a narrow tool scope and a human checkpoint before anything leaves the sandbox, not broad autonomy for its own sake.",
       architectureDiagram: `
                          ┌─────────────────────────────┐
-                         │  SAP: PO, GRN, invoice,        │
+                         │  ERP: PO, GRN, invoice,        │
                          │  QM inspection-lot data          │
                          │  (read-only access for agents)   │
                          └───────────────┬─────────────┘
@@ -555,12 +555,12 @@ export const caseStudies: CaseStudy[] = [
               │  Exception Intake Agent                       │
               │  tool scope: read PO/GRN/invoice, classify      │
               │  exception type, write to exception queue       │
-              │  (no SAP writes, no outbound email)              │
+              │  (no ERP writes, no outbound email)              │
               └───────────────────┬────────────────────────┘
                                    ▼
               ┌────────────────────────────────────────────┐
               │  Three-Way-Match & Quality-Hold Agent          │
-              │  tool scope: read-only SAP query (PO/GRN/       │
+              │  tool scope: read-only ERP query (PO/GRN/       │
               │  invoice variance, QM inspection-lot status),    │
               │  write variance detail + hold status to queue   │
               └───────────────────┬────────────────────────┘
@@ -583,33 +583,33 @@ export const caseStudies: CaseStudy[] = [
               ┌────────────────────────────────────────────┐
               │  Release Preparation Agent                     │
               │  tool scope: assemble the approved payment      │
-              │  batch or PO-amendment package for SAP —         │
+              │  batch or PO-amendment package for the ERP —      │
               │  prepares only; a human in Finance executes       │
-              │  the release/amendment inside SAP itself           │
+              │  the release/amendment inside the ERP itself       │
               └────────────────────────────────────────────┘`,
       integrations:
         "Input: SAP purchase order, goods-receipt, invoice, and QM inspection-lot data, read-only for every agent in this pattern. Internal: an exception queue — a structured datastore, not a shared inbox — that every agent reads from and writes structured updates to rather than passing free-text between agents. Human-facing: an approval interface where the named approver sees exactly what each agent found and drafted, with one-click approve, edit, or reject. Outbound: vendor and internal emails send only after human approval; no agent holds outbound-send permission.",
       techStack: [
         "Orchestration layer coordinating four narrowly scoped agents",
         "Structured exception-queue datastore",
-        "Read-only SAP integration (no write-back path in this design)",
+        "Read-only ERP integration (no write-back path in this design)",
         "Human-approval interface with full audit logging",
       ],
       workflow: [
-        { step: "Classify", detail: "A three-way mismatch or quality hold appears in SAP; the Exception Intake Agent reads the relevant records and classifies the exception type (price variance, quantity variance, late invoice, quality hold, or a combination)." },
+        { step: "Classify", detail: "A three-way mismatch or quality hold appears in the ERP; the Exception Intake Agent reads the relevant records and classifies the exception type (price variance, quantity variance, late invoice, quality hold, or a combination)." },
         { step: "Check", detail: "The Three-Way-Match & Quality-Hold Agent pulls the specific variance figures and checks whether an open QM inspection-lot hold applies, writing both to the exception queue." },
         { step: "Draft", detail: "The Vendor/Internal Query Drafting Agent drafts the appropriate communication from the queue data, and stops." },
         { step: "Approve", detail: "The named human approver reviews the classification, variance, hold status, and draft together, and approves, edits, or rejects." },
         { step: "Release (approved only)", detail: "Only on approval does a communication send, or does the Release Preparation Agent assemble a payment-batch or PO-amendment package." },
-        { step: "Execute (human)", detail: "A human in Finance or Procurement executes the actual SAP action — no agent in this pattern has that permission." },
+        { step: "Execute (human)", detail: "A human in Finance or Procurement executes the actual ERP action — no agent in this pattern has that permission." },
         { step: "Audit", detail: "Every step, every agent's output, and every human decision is logged to the audit trail tied to that exception." },
       ],
       methodology:
-        "Each agent's tool list was scoped before its prompt was written: what it can read, what it can write, and explicitly what it cannot do (send email, write to SAP, release payment). That scoping is the actual design artefact, not the prompt wording — a narrowly tooled agent with a mediocre prompt is safer than a broadly tooled agent with a careful one, because the tool boundary holds even when the model's judgment doesn't. The human checkpoint sits at the one place in the workflow where a wrong decision has a real cost, not scattered as a rubber-stamp step at every stage.",
+        "Each agent's tool list was scoped before its prompt was written: what it can read, what it can write, and explicitly what it cannot do (send email, write to the ERP, release payment). That scoping is the actual design artefact, not the prompt wording — a narrowly tooled agent with a mediocre prompt is safer than a broadly tooled agent with a careful one, because the tool boundary holds even when the model's judgment doesn't. The human checkpoint sits at the one place in the workflow where a wrong decision has a real cost, not scattered as a rubber-stamp step at every stage.",
       security:
-        "No agent in this pattern holds write access to SAP or outbound-send permission — every consequential action is human-executed. Full audit logging ties every proposed action to the agent that produced it and the human decision that followed, which is what lets a reviewer answer \"why did this payment release\" without reconstructing the exception from email threads afterward. Tool outputs — including anything an agent reads from a vendor email or attached document, in a fuller version of this pattern — would be treated as untrusted content, not instructions, to guard against prompt injection through the documents these agents process.",
+        "No agent in this pattern holds write access to the ERP or outbound-send permission — every consequential action is human-executed. Full audit logging ties every proposed action to the agent that produced it and the human decision that followed, which is what lets a reviewer answer \"why did this payment release\" without reconstructing the exception from email threads afterward. Tool outputs — including anything an agent reads from a vendor email or attached document, in a fuller version of this pattern — would be treated as untrusted content, not instructions, to guard against prompt injection through the documents these agents process.",
       deployment:
-        "This is an illustrative scenario: no client has deployed this exact workflow, no agent described here has processed a real transaction, and no outcome below is a measured result. It is realistic in structure — the exception types, the SAP objects involved, and the agent-scoping approach reflect how we would actually build this — but it is a design exercise, written to show engineering approach, not a claim that a manufacturer is running it today.",
+        "This is an illustrative scenario: no client has deployed this exact workflow, no agent described here has processed a real transaction, and no outcome below is a measured result. It is realistic in structure — the exception types, the ERP objects involved (PO, GRN, invoice), and the agent-scoping approach reflect how we would actually build this — but it is a design exercise, written to show engineering approach, not a claim that a manufacturer is running it today.",
       benefits: [
         "Would move the triage work — classify, check, draft — to agents while keeping every consequential decision with a named human.",
         "Answers the two real fears buyers have about agentic systems: that an agent might do something costly on its own, and that nobody could explain afterward why it did.",
@@ -1014,7 +1014,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "legacy-erp-process-modernisation",
     title: "Legacy ERP Process Modernisation",
     tagline:
-      "A dated baseline, a documented source-to-target mapping, and parity-tested cutover — moving a reporting layer off Google Sheets without touching SAP.",
+      "A dated baseline, a documented source-to-target mapping, and parity-tested cutover — moving a reporting layer off Google Sheets onto a governed Microsoft stack, without touching the source ERP.",
     category: "implementation",
     statusLabel: "Implemented and ongoing",
     pillar: "custom-software-development",
@@ -1220,7 +1220,7 @@ export const caseStudies: CaseStudy[] = [
     pillar: "enterprise-ai-architecture-deployment",
     disclosure: DISCLOSURE.reference,
     architecture: [
-      "Source systems (SAP exports)",
+      "Source systems (ERP exports)",
       "Staging → Core → Calc → Reporting (delivered pattern)",
       "Governance / IAM boundary",
       "AI / agent layer (read-only, reporting layer only)",
@@ -1236,7 +1236,7 @@ export const caseStudies: CaseStudy[] = [
         "Attach the AI/agent layer at the reporting layer only, reading from the same reconciled, oracle-verified output that a human report-consumer would see — never from staging or core, and never with a write path back into the reconciliation controls. Identity and access management sits as an explicit boundary between the data layer and the AI layer, resolving what a given agent or user is permitted to read before any query reaches the platform, using the same AD/IAM pattern described in the Enterprise AI Deployment case study.",
       architectureDiagram: `
    Source systems                Governed data layer (delivered pattern — Theme 7)
-   (SAP exports, etc.)            ─────────────────────────────────────────────
+   (ERP exports, etc.)            ─────────────────────────────────────────────
          │                         staging → core → calc → reporting
          ▼                         (versioned migrations, hash-verified
    ┌───────────┐                   lineage, oracle-reconciled on every run)
