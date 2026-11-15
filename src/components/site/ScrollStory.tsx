@@ -225,16 +225,6 @@ export function ScrollStory() {
             );
           })}
 
-          {/* Metrics revealed during OPTIMISE */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{ opacity: optimise }}
-          >
-            <Metric top="12%" left="18%" label="LATENCY" value="-42%" />
-            <Metric top="22%" left="78%" label="THROUGHPUT" value="+3.1×" />
-            <Metric top="72%" left="14%" label="EXCEPTIONS" value="2" />
-            <Metric top="78%" left="80%" label="HOURS SAVED" value="25+" />
-          </div>
         </div>
 
         {/* Kinetic typography overlay */}
@@ -352,24 +342,3 @@ function RevealWord({ show, children }: { show: boolean; children: React.ReactNo
   );
 }
 
-function Metric({
-  top,
-  left,
-  label,
-  value,
-}: {
-  top: string;
-  left: string;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div
-      className="absolute -translate-x-1/2 -translate-y-1/2 rounded-lg border border-purple/30 bg-background/40 backdrop-blur-sm px-3 py-1.5 text-center"
-      style={{ top, left }}
-    >
-      <div className="text-[8px] tracking-[0.22em] text-white/60">{label}</div>
-      <div className="text-sm font-medium text-white">{value}</div>
-    </div>
-  );
-}

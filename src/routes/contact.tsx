@@ -23,7 +23,6 @@ export const Route = createFileRoute("/contact")({
       >
         <div className="mt-10 flex flex-wrap gap-3">
           <a href={CALENDLY_URL} target="_blank" rel="noreferrer" className="btn-primary">Book a Strategy Call</a>
-          <a href="mailto:hello@baseline.ai" className="btn-ghost">hello@baseline.ai</a>
         </div>
       </PageHero>
     </SiteLayout>
